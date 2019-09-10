@@ -28,6 +28,11 @@ void ATank::Tick(float DeltaTime)
 
 }
 
+void ATank::SetBarrelRef(UStaticMeshComponent* BarrelToSet) 
+{
+	TankAimComponent->SetBarrelRef(BarrelToSet);
+}
+
 // Called to bind functionality to input
 void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
@@ -37,6 +42,6 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void ATank::AimAt(FVector HitLocation)
 {	
-	TankAimComponent->AimAt(HitLocation);
+	TankAimComponent->AimAt(HitLocation, LaunchSpeed);
 	
 }
