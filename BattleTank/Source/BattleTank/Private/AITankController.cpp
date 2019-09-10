@@ -18,6 +18,18 @@ void AAITankController::BeginPlay()
 	}
 }
 
+void AAITankController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	if (GetPlayerTank())
+	{
+		// TODO Move at player
+
+		// Aim towards player
+		GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+	}
+}
+
 ATank* AAITankController::GetControlledTank() const
 {
 	return Cast<ATank>(GetPawn());
