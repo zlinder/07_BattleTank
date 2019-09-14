@@ -2,13 +2,14 @@
 
 
 #include "Tank.h"
+#include "TankAimComponent.h"
 #include "..\Public\Tank.h"
 
 // Sets default values
 ATank::ATank()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 	TankAimComponent = CreateDefaultSubobject<UTankAimComponent>(FName ("Aim Component"));
 
@@ -21,12 +22,7 @@ void ATank::BeginPlay()
 	
 }
 
-// Called every frame
-void ATank::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
 
-}
 
 void ATank::SetBarrelRef(UTankBarrel* BarrelToSet) 
 {
