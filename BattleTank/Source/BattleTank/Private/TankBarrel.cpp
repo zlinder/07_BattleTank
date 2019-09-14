@@ -5,6 +5,7 @@
 #include "TankAimComponent.h"
 
 
+
 void UTankBarrel::Elevate(float RelativeSpeed)
 {
 	RelativeSpeed = FMath::Clamp<float>(RelativeSpeed, -1, +1);
@@ -13,4 +14,3 @@ void UTankBarrel::Elevate(float RelativeSpeed)
 	auto Elevation = FMath::Clamp<float>(RawNewElevation, MinDegreesElevation, MaxDegreesElevation);
 	SetRelativeRotation(FRotator(Elevation, 0, 0));
 }
-
