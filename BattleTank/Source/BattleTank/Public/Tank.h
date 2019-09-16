@@ -8,6 +8,7 @@
 #include "Tank.generated.h"
 
 class UTankBarrel;
+class AProjectile;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -16,7 +17,7 @@ class BATTLETANK_API ATank : public APawn
 
 public:
 	// Sets default values for this pawn's properties
-	ATank();
+	
 
 	void AimAt(FVector HitLocation);
 
@@ -35,7 +36,10 @@ protected:
 
 	UTankAimComponent* TankAimComponent = nullptr;
 
-public:	
+
+private:	
+
+	ATank();
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
@@ -43,4 +47,8 @@ public:
 	UPROPERTY(EditAnywhere, Category = Firing)
 	float LaunchSpeed =  4000;
 
+	UPROPERTY(EditAnywhere, Category = Setup)
+	TSubclassOf<AProjectile> ProjectileBlueprint;
+
+	UTankBarrel* Barrel = nullptr;
 };

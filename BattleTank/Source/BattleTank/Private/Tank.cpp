@@ -2,6 +2,8 @@
 
 
 #include "Tank.h"
+#include "TankBarrel.h"
+#include "Projectile.h"
 #include "TankAimComponent.h"
 #include "..\Public\Tank.h"
 
@@ -12,6 +14,8 @@ ATank::ATank()
 	PrimaryActorTick.bCanEverTick = false;
 
 	TankAimComponent = CreateDefaultSubobject<UTankAimComponent>(FName ("Aim Component"));
+
+
 
 }
 
@@ -27,6 +31,7 @@ void ATank::BeginPlay()
 void ATank::SetBarrelRef(UTankBarrel* BarrelToSet) 
 {
 	TankAimComponent->SetBarrelRef(BarrelToSet);
+	Barrel = BarrelToSet;
 }
 
 void ATank::SetTurretRef(UTankTurret* TurretToSet)
@@ -36,8 +41,15 @@ void ATank::SetTurretRef(UTankTurret* TurretToSet)
 
 void ATank::Fire()
 {
-	auto Time = GetWorld()->GetTimeSeconds();
-	UE_LOG(LogTemp, Warning, TEXT("%f: Tank Fires"), Time);
+	if (!Barrel) { return; }
+
+	auto Projectile = GetWorld()->SpawnActor<AProjectile>
+		(ProjectileBlueprint,
+			Barrel->GetSocketLocation(FName("Projectile")),
+			Barrel->GetSocketRotation(FName("Projectile"))
+			);
+
+	Projectile->LaunchProjectile(LaunchSpeed);
 }
 
 // Called to bind functionality to input
