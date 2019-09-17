@@ -20,7 +20,7 @@ void AAITankController::Tick(float DeltaTime)
 	if (PlayerTank)
 	{
 		// TODO Move at player
-
+		MoveToActor(PlayerTank, AcceptanceRadius);
 		// Aim towards player
 		ControlledTank->AimAt(PlayerTank->GetActorLocation());
 

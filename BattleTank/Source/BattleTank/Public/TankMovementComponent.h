@@ -30,4 +30,7 @@ public:
 private:
 	UTankTrack* LeftTrack = nullptr;
 	UTankTrack* RightTrack = nullptr;
+
+	//Call from the pathfinding logic for AI Controllers
+	virtual void RequestDirectMove(const FVector& MoveVelocity, bool bForeMaxSpeed) override;
 };
