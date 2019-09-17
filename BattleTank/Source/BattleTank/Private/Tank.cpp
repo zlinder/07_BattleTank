@@ -1,10 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Tank.h"
+#include "BattleTank.h"
 #include "TankBarrel.h"
 #include "Projectile.h"
 #include "TankAimComponent.h"
+#include "TankMovementComponent.h"
 #include "..\Public\Tank.h"
 
 // Sets default values
@@ -14,9 +15,7 @@ ATank::ATank()
 	PrimaryActorTick.bCanEverTick = false;
 
 	TankAimComponent = CreateDefaultSubobject<UTankAimComponent>(FName ("Aim Component"));
-
-
-
+	
 }
 
 // Called when the game starts or when spawned

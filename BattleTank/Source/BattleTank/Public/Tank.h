@@ -8,7 +8,10 @@
 #include "Tank.generated.h"
 
 class UTankBarrel;
+class UTankAimComponent;
+class UTankMovementComponent;
 class AProjectile;
+
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -35,6 +38,9 @@ protected:
 	virtual void BeginPlay() override;
 
 	UTankAimComponent* TankAimComponent = nullptr;
+
+	UPROPERTY(BlueprintReadOnly)
+	UTankMovementComponent* TankMovementComponent = nullptr;
 
 
 private:	
