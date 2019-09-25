@@ -2,6 +2,7 @@
 
 
 #include "TankPlayerController.h"
+#include "TankAimComponent.h"
 #include "BattleTank.h"
 #include "Engine/World.h"
 #include "Tank.h"
@@ -12,6 +13,15 @@ void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
+	auto AimComponent = GetControlledTank()->FindComponentByClass<UTankAimComponent>();
+	if (AimComponent) 
+	{
+	FoundAimingComponent(AimComponent);
+	}
+	else
+	{
+		UE_LOG(LogTemp,Warning, TEXT("PlayerController can't find AimComp"))
+	}
 	auto ControlledTank = GetControlledTank();
 	if (!ControlledTank)
 	{
@@ -33,6 +43,8 @@ ATank* ATankPlayerController::GetControlledTank() const
 {
 	return Cast<ATank>(GetPawn());
 }
+
+
 
 void ATankPlayerController::AimTowardsCrosshair() 
 {

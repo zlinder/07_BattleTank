@@ -18,17 +18,12 @@ UTankAimComponent::UTankAimComponent()
 }
 
 
-void UTankAimComponent::SetBarrelRef(UTankBarrel* BarrelToSet)
+void UTankAimComponent::Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet) 
 {
-	if (!BarrelToSet) { return; }
 	Barrel = BarrelToSet;
-}
-
-void UTankAimComponent::SetTurretRef(UTankTurret* TurretToSet)
-{
-	if (!TurretToSet) { return; }
 	Turret = TurretToSet;
 }
+
 
 // Called when the game starts
 void UTankAimComponent::BeginPlay()
@@ -77,7 +72,7 @@ void UTankAimComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 
 void UTankAimComponent::MoveBarrelTowards(FVector AimDirection)
 {
-	
+	if (!Barrel || !Turret) { return; }
 	auto BarrelRotation = Barrel->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotation;
