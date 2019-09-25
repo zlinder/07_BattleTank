@@ -4,11 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
-#include "TankAimComponent.h"
 #include "Tank.generated.h"
 
 class UTankBarrel;
-class UTankAimComponent;
 class AProjectile;
 
 
@@ -19,9 +17,7 @@ class BATTLETANK_API ATank : public APawn
 
 public:
 	// Sets default values for this pawn's properties
-	
 
-	void AimAt(FVector HitLocation);
 
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();
@@ -29,9 +25,6 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-	UPROPERTY(BlueprintReadOnly)
-	UTankAimComponent* TankAimComponent = nullptr;
 
 
 private:	

@@ -4,7 +4,6 @@
 #include "BattleTank.h"
 #include "TankBarrel.h"
 #include "Projectile.h"
-#include "TankAimComponent.h"
 
 #include "..\Public\Tank.h"
 
@@ -13,9 +12,6 @@ ATank::ATank()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-	
-	auto TankName = GetName();
-	UE_LOG(LogTemp, Warning, TEXT("%s Donkey: Tank C++ Construct"), *TankName);
 }
 
 // Called when the game starts or when spawned
@@ -23,7 +19,7 @@ void ATank::BeginPlay()
 {
 	Super::BeginPlay();
 	auto TankName = GetName();
-	UE_LOG(LogTemp, Warning, TEXT("%s Donkey: Tank C++ Begin Play"), *TankName);
+
 }
 
 
@@ -45,12 +41,4 @@ void ATank::Fire()
 		Projectile->LaunchProjectile(LaunchSpeed);
 		LastTimeFired = FPlatformTime::Seconds();
 	}
-}
-
-
-void ATank::AimAt(FVector HitLocation)
-{	
-	if (!ensure(TankAimComponent)) { return; }
-	TankAimComponent->AimAt(HitLocation, LaunchSpeed);
-	
 }
