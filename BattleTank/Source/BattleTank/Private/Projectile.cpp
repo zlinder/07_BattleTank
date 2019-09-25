@@ -2,7 +2,7 @@
 
 
 #include "Projectile.h"
-
+#include "BattleTank.h"
 
 // Sets default values
 AProjectile::AProjectile()

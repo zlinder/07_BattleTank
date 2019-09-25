@@ -14,7 +14,7 @@ void ATankPlayerController::BeginPlay()
 	Super::BeginPlay();
 
 	auto AimComponent = GetControlledTank()->FindComponentByClass<UTankAimComponent>();
-	if (AimComponent) 
+	if (ensure(AimComponent))
 	{
 	FoundAimingComponent(AimComponent);
 	}
@@ -23,7 +23,7 @@ void ATankPlayerController::BeginPlay()
 		UE_LOG(LogTemp,Warning, TEXT("PlayerController can't find AimComp"))
 	}
 	auto ControlledTank = GetControlledTank();
-	if (!ControlledTank)
+	if (!ensure(ControlledTank))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("PlayerController not possessing Tank"));
 	}
@@ -48,7 +48,7 @@ ATank* ATankPlayerController::GetControlledTank() const
 
 void ATankPlayerController::AimTowardsCrosshair() 
 {
-	if (!GetControlledTank()) { return; }
+	if (!ensure(GetControlledTank())) { return; }
 
 	FVector HitLocation;
 	if (GetSightRayHitLocation(HitLocation)) 

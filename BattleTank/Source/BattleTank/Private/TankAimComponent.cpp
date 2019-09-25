@@ -2,6 +2,7 @@
 
 
 #include "TankAimComponent.h"
+#include "BattleTank.h"
 #include "Kismet/GameplayStatics.h"
 #include "TankTurret.h"
 #include "TankBarrel.h"
@@ -46,7 +47,7 @@ void UTankAimComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 
 void UTankAimComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
-	if (!Barrel) { return; }
+	if (!ensure(Barrel)) { return; }
 
 	FVector OutLaunchVelocity(0);
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
@@ -72,7 +73,7 @@ void UTankAimComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 
 void UTankAimComponent::MoveBarrelTowards(FVector AimDirection)
 {
-	if (!Barrel || !Turret) { return; }
+	if (!ensure(Barrel) || !ensure(Turret)) { return; }
 	auto BarrelRotation = Barrel->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotation;

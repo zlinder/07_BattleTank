@@ -2,6 +2,7 @@
 
 
 #include "AITankController.h"
+#include "BattleTank.h"
 #include "Tank.h"
 
 void AAITankController::BeginPlay()
@@ -17,7 +18,7 @@ void AAITankController::Tick(float DeltaTime)
 	auto PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
 	auto ControlledTank = Cast<ATank>(GetPawn());
 
-	if (PlayerTank)
+	if (ensure(PlayerTank))
 	{
 		// TODO Move at player
 		MoveToActor(PlayerTank, AcceptanceRadius);
